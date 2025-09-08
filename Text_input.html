@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Character Counter</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    textarea {
+      width: 300px;
+      height: 100px;
+    }
+    #counter {
+      margin-top: 5px;
+      font-weight: bold;
+      color: black;
+    }
+    #counter.red {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h3>Message (max 200 characters)</h3>
+  <textarea id="myText"></textarea>
+  <div id="counter">200 characters remaining</div>
+
+  <script>
+    $(document).ready(function() {
+      var limit = 200;
+
+      $("#myText").on("input", function() {
+        var text = $(this).val();
+
+        if (text.length > limit) {
+          text = text.substring(0, limit);
+          $(this).val(text);
+        }
+
+        var remaining = limit - text.length;
+        $("#counter").text(remaining + " characters remaining");
+
+        if (remaining === 0) {
+          $("#counter").addClass("red");
+        } else {
+          $("#counter").removeClass("red");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
